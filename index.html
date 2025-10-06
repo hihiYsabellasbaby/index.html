@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Monthsary 💕</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    background: #fffaf7;
+    color: #333;
+    font-family: "Poppins", sans-serif;
+    overflow: hidden;
+    transition: background 1s ease;
+  }
+
+  section {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1s ease, transform 1s ease;
+  }
+
+  section.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  h1 {
+    font-size: 2.2em;
+    text-align: center;
+    margin: 10px;
+  }
+
+  button {
+    background: pink;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 15px;
+    border-radius: 15px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  button:hover {
+    background: #ff8fa3;
+    transform: scale(1.05);
+  }
+
+  /* Love Letter Page */
+  .letter {
+    font-family: "Great Vibes", cursive;
+    font-size: 1.5em;
+    color: #3e2723;
+    background: #f9f4e9;
+    padding: 40px;
+    margin: 40px;
+    border-radius: 15px;
+    max-height: 70vh;
+    overflow-y: auto;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  }
+
+  /* Scrollbar Style */
+  .letter::-webkit-scrollbar {
+    width: 8px;
+  }
+  .letter::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 5px;
+  }
+
+  /* Floating Hearts */
+  .heart {
+    position: absolute;
+    color: pink;
+    font-size: 20px;
+    animation: float 6s linear infinite;
+  }
+
+  @keyframes float {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-100vh); opacity: 0; }
+  }
+</style>
+</head>
+
+<body>
+
+<audio id="bgMusic" src="https://www.youtube.com/embed/nNXSSfSmbao?autoplay=1" type="audio/mpeg"></audio>
+
+<section id="page1" class="active">
+  <h1>Happy Monthsary Darling 💖</h1>
+  <button onclick="nextPage()">Yayyy!!</button>
+</section>
+
+<section id="page2">
+  <h1 id="question">Do you love me? ☹️</h1>
+  <div>
+    <button onclick="yesAnswer()">Yesss Ofcourse Babyy 💞</button>
+    <button onclick="noAnswer()">No cuz u ugly as hell 🙄</button>
+  </div>
+</section>
+
+<section id="page3">
+  <h1>YAAAYYYYY MY BABY LOVES ME GUYZ 😛🫶</h1>
+  <button onclick="nextPage()">OFCOURSE 😤</button>
+</section>
+
+<section id="page4">
+  <h1>Are you ready for my surprise? 🎁</h1>
+  <button onclick="nextPage()">Yes!! 😛</button>
+</section>
+
+<section id="page5">
+  <h1>I hope this is good enough tho cuz I think nakulangan ako dito 🥲🙏🏻</h1>
+  <button onclick="nextPage()">HOY ANONG KULANG 😤</button>
+</section>
+
+<section id="page6">
+  <div class="letter">
+    <p>Happy Monthsary and National Girlfriends day Baby^^</p>
+    <p>I dedicate this message to you and only you. For the woman I so love dearly; the woman I could never get tired of loving...</p>
+    <p>No matter what path you take in life always remember that you will always have me by your side...</p>
+    <p>... -Love, Krison^^</p>
+  </div>
+</section>
+
+<script>
+let current = 1;
+const total = 6;
+const questions = [
+  "Do you love me? ☹️",
+  "Am I really ugly? 😞",
+  "Are you sure? 😞"
+];
+let questionIndex = 0;
+
+function nextPage() {
+  document.getElementById(`page${current}`).classList.remove('active');
+  current++;
+  if (current <= total) {
+    document.getElementById(`page${current}`).classList.add('active');
+  }
+  if (current === 2) document.getElementById("bgMusic").play();
+}
+
+function yesAnswer() {
+  nextPage();
+}
+
+function noAnswer() {
+  questionIndex++;
+  if (questionIndex >= questions.length) questionIndex = 0;
+  document.getElementById("question").innerText = questions[questionIndex];
+}
+
+/* Floating hearts generator */
+setInterval(() => {
+  const heart = document.createElement("div");
+  heart.classList.add("heart");
+  heart.innerText = "💗";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.animationDuration = (4 + Math.random() * 3) + "s";
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 6000);
+}, 800);
+</script>
+</body>
+</html>
